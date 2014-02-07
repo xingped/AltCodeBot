@@ -17,13 +17,13 @@ def quick_url(comment):
 def commands():
 	global ignusr_store, ignsub_store
 	for msg in session.get_unread(limit=None):
-		match = regex.search("!ignore me", msg.body.lower())
+		match = regex.search("!ignoreme", msg.body.lower())
 		if match:
 			ignusr_store[msg.author.name.lower()] = 1
 			print('\nIgnoring User:', msg.author.name.lower())
 			msg.reply('User {0} will be ignored from now on.'.format(msg.author.name))
 		
-		match = regex.search("!ignore sub", msg.body.lower())
+		match = regex.search("!ignoresub", msg.body.lower())
 		if match and comment.author in r.get_moderators(comment.subreddit):
 			ignsub_store[msg.subreddit.lower()] = 1
 			print('\nIgnoring Subreddit:', msg.subreddit.lower())
@@ -199,7 +199,7 @@ def main():
 					replytext += '* {0} : {1}\n'.format(k, v)
 			
 			replytext += "\n\nPlease let me know if you like me, hate me, or think I've made a mistake."
-			replytext += "\n\n**Commands:** '!ignore me' (User), '!ignore sub' (Mods)"
+			replytext += "\n\n**Commands:** '!ignoreme' (User), '!ignoresub' (Mods). You can use both commands at once."
 			
 			comments_done.append(comment.id)
 			
